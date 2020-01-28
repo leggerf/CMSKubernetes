@@ -52,8 +52,8 @@ cp CMSKubernetes/kubernetes/cmsweb/scripts/create_templates.sh .
 
 # first we'll create a new template with all labels suitable for cms
 # by default create_template use "CMS Web" project, therefore
-# we'll use "default" project by resetting OS_PROJECT_NAME
-# the create_template.sh script will create cmsweb-temaplate-medium
+# we'll use the "default" project by resetting OS_PROJECT_NAME
+# the create_template.sh script will create cmsweb-temaplate-DATE (DATE will be the date of today)
 
 # you can find list of projects you're in using
 openstack project list
@@ -70,18 +70,18 @@ openstack coe cluster template list
 | 49187d11-6442-43da-bedc-695ae522e8c5 | swarm-preview          |
 | 17760a5f-8957-4794-ab96-0d6bd8627282 | swarm-18.06-1          |
 | ab08b219-3246-4995-bf76-a3123f69cb4f | swarm-1.13.1-2         |
-| a6d5b08d-f90a-46b4-900c-a5bd170664a5 | cmsweb-template-medium |
+| a6d5b08d-f90a-46b4-900c-a5bd170664a5 | cmsweb-template-DATE |
 | 0b6d5c5f-976a-4f05-9edb-06489bc6538b | kubernetes-1.14.6-1    |
 | 6b4fc2c2-00b0-410d-a784-82b6ebdd85bc | kubernetes-1.13.10-1   |
 | 30c8db8a-49d0-470d-b9c6-dd684d4d0079 | kubernetes-1.15.3-2    |
 +--------------------------------------+------------------------+
 
 # now, let's create a cluster with cmsweb-template
-openstack coe cluster create test-cluster --keypair cloud --cluster-template cmsweb-template-medium
+openstack coe cluster create test-cluster --keypair cloud --cluster-template cmsweb-template-DATE
 ```
 
 You may check its status like this (please note that IDs or names will be assigned dynamically
-and you output will have different ones):
+and your output will have different ones):
 ```
 openstack coe cluster list
 +--------------------------------------+--------------+---------+------------+--------------+--------------------+---------------+
@@ -90,7 +90,7 @@ openstack coe cluster list
 | 62ca8a05-c209-4f2e-b684-f6cf90d90b06 | test-cluster | cloud   |          1 |            1 | CREATE_IN_PROGRESS | None          |
 +--------------------------------------+--------------+---------+------------+--------------+--------------------+---------------+
 ```
-Once cluster is created you'll have the following status
+Once the cluster is created you'll have the following status
 ```
 openstack coe cluster list
 +--------------------------------------+--------------+---------+------------+--------------+-----------------+---------------+
